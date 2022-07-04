@@ -49,7 +49,6 @@ class FeedViewController: UIViewController {
         stackView.addArrangedSubview(button2)
         
         setupConstraints()
-        //navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Post", style: .plain, target: self, action: #selector(postTap))
     }
     
     @objc private func postTap() {
