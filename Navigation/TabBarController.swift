@@ -8,10 +8,13 @@
 import UIKit
 
 class TabBarController: UITabBarController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setupTabBar()
+    }
+    
+    private func setupTabBar() {
         let feedVC = UINavigationController(rootViewController: FeedViewController())
         feedVC.tabBarItem.title = "Feed"
         feedVC.tabBarItem.image = UIImage(systemName: "square.grid.3x3.topright.fill")
