@@ -14,7 +14,7 @@ class ProfileHeaderView: UIView {
         let image = UIImageView(image: UIImage(named: "h2"))
         image.layer.borderWidth = 3
         image.layer.borderColor = UIColor.white.cgColor
-        image.translatesAutoresizingMaskIntoConstraints = false
+        image.toAutoLayout()
         image.clipsToBounds = true
         
         return image
@@ -23,7 +23,7 @@ class ProfileHeaderView: UIView {
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.text = "Homer"
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.toAutoLayout()
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textColor = .black
         
@@ -41,8 +41,7 @@ class ProfileHeaderView: UIView {
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOpacity = 0.7
         button.addTarget(self, action: #selector(buttonPress), for: .touchUpInside)
-        
-        button.translatesAutoresizingMaskIntoConstraints = false
+        button.toAutoLayout()
         return button
     }()
     
@@ -51,8 +50,7 @@ class ProfileHeaderView: UIView {
         label.text = "Waiting for something..."
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = .gray
-        
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.toAutoLayout()
         return label
     }()
     
@@ -67,23 +65,13 @@ class ProfileHeaderView: UIView {
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
         textField.leftViewMode = .always
         textField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
-        
-        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.toAutoLayout()
         return textField
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        backgroundColor = .lightGray
-        
-        addSubview(avatarImageView)
-        addSubview(nameLabel)
-        addSubview(statusButton)
-        addSubview(statusLabel)
-        addSubview(statusTextField)
-        
-        setupConstraints()
+        setupSubviews()
     }
     
     required init?(coder: NSCoder) {
@@ -103,6 +91,18 @@ class ProfileHeaderView: UIView {
     @objc private func statusTextChanged(_ textField: UITextField) {
         guard let statusText = textField.text else { return }
         print(statusText)
+    }
+    
+    private func setupSubviews() {
+        backgroundColor = .lightGray
+        
+        addSubview(avatarImageView)
+        addSubview(nameLabel)
+        addSubview(statusButton)
+        addSubview(statusLabel)
+        addSubview(statusTextField)
+        
+        setupConstraints()
     }
     
     private func setupConstraints() {

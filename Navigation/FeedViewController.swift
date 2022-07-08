@@ -15,7 +15,7 @@ class FeedViewController: UIViewController {
         stack.distribution = .fillEqually
         stack.axis = .vertical
         stack.spacing = 10
-        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.toAutoLayout()
         
         return stack
     }()
@@ -40,7 +40,16 @@ class FeedViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupSubviews()
+    }
+    
+    @objc private func postTap() {
+        let postVC = PostViewController()
+        postVC.post = post
+        navigationController?.pushViewController(postVC, animated: true)
+    }
+    
+    private func setupSubviews() {
         view.backgroundColor = .white
         navigationItem.title = "Feed"
         
@@ -49,12 +58,6 @@ class FeedViewController: UIViewController {
         stackView.addArrangedSubview(button2)
         
         setupConstraints()
-    }
-    
-    @objc private func postTap() {
-        let postVC = PostViewController()
-        postVC.post = post
-        navigationController?.pushViewController(postVC, animated: true)
     }
     
     private func setupConstraints() {

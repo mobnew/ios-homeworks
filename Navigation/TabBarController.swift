@@ -19,7 +19,7 @@ class TabBarController: UITabBarController {
         feedVC.tabBarItem.title = "Feed"
         feedVC.tabBarItem.image = UIImage(systemName: "square.grid.3x3.topright.fill")
         
-        let profileVC = UINavigationController(rootViewController: ProfileViewController())
+        let profileVC = UINavigationController(rootViewController: LogInViewController())
         profileVC.tabBarItem.title = "Profile"
         profileVC.tabBarItem.image = UIImage(systemName: "person")
         

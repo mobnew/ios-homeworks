@@ -11,28 +11,30 @@ class ProfileViewController: UIViewController {
     
     private lazy var profileHeaderView: ProfileHeaderView = {
         let profileHeaderView = ProfileHeaderView()
-        profileHeaderView.translatesAutoresizingMaskIntoConstraints = false
+        profileHeaderView.toAutoLayout()
         return profileHeaderView
     }()
     
     private lazy var tempButton: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.backgroundColor = .systemIndigo
         button.tintColor = .white
         button.setTitle("Temp button", for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
+        button.toAutoLayout()
         return button
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupSubviews()
+    }
+    
+    private func setupSubviews() {
         view.backgroundColor = .lightGray
         navigationItem.title = "Profile"
         
         view.addSubview(profileHeaderView)
-        self.view.addSubview(tempButton)
+        view.addSubview(tempButton)
         
         setupConstraints()
     }
