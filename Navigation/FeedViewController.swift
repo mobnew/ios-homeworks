@@ -9,19 +9,61 @@ import UIKit
 
 class FeedViewController: UIViewController {
     let post: Post = Post(title: "New title")
+    
+    private lazy var stackView: UIStackView = {
+       let stack = UIStackView()
+        stack.distribution = .fillEqually
+        stack.axis = .vertical
+        stack.spacing = 10
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        
+        return stack
+    }()
+    
+    private lazy var button1: UIButton = {
+       let button = UIButton()
+        button.backgroundColor = .systemYellow
+        button.tintColor = .white
+        button.setTitle("Button one", for: .normal)
+        button.addTarget(self, action: #selector(postTap), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var button2: UIButton = {
+       let button = UIButton()
+        button.backgroundColor = .systemYellow
+        button.tintColor = .white
+        button.setTitle("Button two", for: .normal)
+        button.addTarget(self, action: #selector(postTap), for: .touchUpInside)
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
         navigationItem.title = "Feed"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Post", style: .plain, target: self, action: #selector(postTap))
+        
+        view.addSubview(stackView)
+        stackView.addArrangedSubview(button1)
+        stackView.addArrangedSubview(button2)
+        
+        setupConstraints()
     }
     
     @objc private func postTap() {
         let postVC = PostViewController()
         postVC.post = post
         navigationController?.pushViewController(postVC, animated: true)
+    }
+    
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            stackView.heightAnchor.constraint(equalToConstant: 90),
+            stackView.widthAnchor.constraint(equalToConstant: 200),
+            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
     }
 }
 
