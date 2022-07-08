@@ -17,6 +17,7 @@
 		94CF9350286EDED200D51B3D /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CF934F286EDED200D51B3D /* PostViewController.swift */; };
 		94CF9354286EDF3D00D51B3D /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CF9353286EDF3D00D51B3D /* Post.swift */; };
 		94CF9356286EE02100D51B3D /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CF9355286EE02100D51B3D /* InfoViewController.swift */; };
+		94D292782872E09F00A13CFA /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D292772872E09F00A13CFA /* ProfileHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		94CF934F286EDED200D51B3D /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		94CF9353286EDF3D00D51B3D /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		94CF9355286EE02100D51B3D /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		94D292772872E09F00A13CFA /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,19 +66,28 @@
 		94CF9334286ED87900D51B3D /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				94D292762872E07200A13CFA /* Profile */,
 				94CF9335286ED87900D51B3D /* AppDelegate.swift */,
 				94CF9337286ED87900D51B3D /* SceneDelegate.swift */,
 				94CF934B286EDC3E00D51B3D /* FeedViewController.swift */,
 				94CF9353286EDF3D00D51B3D /* Post.swift */,
 				94CF934F286EDED200D51B3D /* PostViewController.swift */,
 				94CF9355286EE02100D51B3D /* InfoViewController.swift */,
-				94CF934D286EDC4B00D51B3D /* ProfileViewController.swift */,
 				94CF9349286EDBDB00D51B3D /* TabBarController.swift */,
 				94CF933E286ED87D00D51B3D /* Assets.xcassets */,
 				94CF9340286ED87D00D51B3D /* LaunchScreen.storyboard */,
 				94CF9343286ED87D00D51B3D /* Info.plist */,
 			);
 			path = Navigation;
+			sourceTree = "<group>";
+		};
+		94D292762872E07200A13CFA /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				94CF934D286EDC4B00D51B3D /* ProfileViewController.swift */,
+				94D292772872E09F00A13CFA /* ProfileHeaderView.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -153,6 +164,7 @@
 				94CF934A286EDBDB00D51B3D /* TabBarController.swift in Sources */,
 				94CF9336286ED87900D51B3D /* AppDelegate.swift in Sources */,
 				94CF934E286EDC4B00D51B3D /* ProfileViewController.swift in Sources */,
+				94D292782872E09F00A13CFA /* ProfileHeaderView.swift in Sources */,
 				94CF934C286EDC3E00D51B3D /* FeedViewController.swift in Sources */,
 				94CF9354286EDF3D00D51B3D /* Post.swift in Sources */,
 				94CF9356286EE02100D51B3D /* InfoViewController.swift in Sources */,
