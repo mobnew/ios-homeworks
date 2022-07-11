@@ -133,7 +133,6 @@ class LogInViewController: UIViewController {
             
             separator.centerYAnchor.constraint(equalTo: emailPassContainer.centerYAnchor),
             separator.heightAnchor.constraint(equalToConstant: 0.5)
-            
         ])
     }
     
@@ -164,15 +163,5 @@ class LogInViewController: UIViewController {
         view.endEditing(true)
         let profileVC = ProfileViewController()
         navigationController?.pushViewController(profileVC, animated: true)
-    }
-}
-
-public extension UIView {
-    func toAutoLayout() {
-        translatesAutoresizingMaskIntoConstraints = false
-    }
-    
-    func addSubviews(_ subviews: UIView...) {
-        subviews.forEach { addSubview($0) }
     }
 }
