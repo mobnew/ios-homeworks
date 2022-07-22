@@ -18,10 +18,11 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
         return view
     }()
     
-    private lazy var avatarImageView: UIImageView = {
+    let avatarImageView: UIImageView = {
         let image = UIImageView(image: UIImage(named: "h2"))
         image.layer.borderWidth = 3
         image.layer.borderColor = UIColor.white.cgColor
+        image.isUserInteractionEnabled = true
         image.toAutoLayout()
         image.clipsToBounds = true
         
