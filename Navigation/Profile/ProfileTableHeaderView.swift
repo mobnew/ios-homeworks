@@ -18,10 +18,11 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
         return view
     }()
     
-    private lazy var avatarImageView: UIImageView = {
+    let avatarImageView: UIImageView = {
         let image = UIImageView(image: UIImage(named: "h2"))
         image.layer.borderWidth = 3
         image.layer.borderColor = UIColor.white.cgColor
+        image.isUserInteractionEnabled = true
         image.toAutoLayout()
         image.clipsToBounds = true
         
@@ -42,7 +43,7 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
         let button = UIButton()
         button.backgroundColor = .systemBlue
         button.tintColor = .white
-        button.setTitle("Show status", for: .normal)
+        button.setTitle("Set status", for: .normal)
         button.layer.cornerRadius = 4
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.layer.shadowRadius = 4
@@ -116,7 +117,7 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
             profileHeaderView.topAnchor.constraint(equalTo: topAnchor),
             profileHeaderView.leadingAnchor.constraint(equalTo: leadingAnchor),
             profileHeaderView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            profileHeaderView.heightAnchor.constraint(equalToConstant: 220),
+            profileHeaderView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
             avatarImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             avatarImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
@@ -130,6 +131,7 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
             statusButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             statusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 16+20),
             statusButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            statusButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
             
             statusTextField.heightAnchor.constraint(equalToConstant: 40),
             statusTextField.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
