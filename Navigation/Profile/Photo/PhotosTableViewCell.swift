@@ -13,13 +13,6 @@ class PhotosTableViewCell: UITableViewCell {
         static let numberOfItemsInLine: CGFloat = 4
     }
     
-    private lazy var tmpView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .red
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.toAutoLayout()
@@ -129,6 +122,6 @@ extension PhotosTableViewCell: UICollectionViewDataSource, UICollectionViewDeleg
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 //        Как правильно обратиться к навигейшен контроллеру?
-        print("Push")
+        print("Push")  
     }
 }
