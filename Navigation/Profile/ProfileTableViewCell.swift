@@ -7,6 +7,7 @@
 
 import UIKit
 import StorageService
+import iOSIntPackage
 
 class ProfileTableViewCell: UITableViewCell {
     
@@ -113,7 +114,9 @@ class ProfileTableViewCell: UITableViewCell {
     
     func setup(with cartoon: PostCartoon) {
         cartoonTitleLabel.text = cartoon.author
-        cartoonImageView.image = UIImage(named: cartoon.image)
+        ImageProcessor().processImage(sourceImage: UIImage(named: cartoon.image)!, filter: .noir) { image in
+            cartoonImageView.image = image
+        }
         cartoonDescriptionLabel.text = cartoon.description
         likesLabel.text = String("Likes: \(cartoon.likes)")
         viewsLabel.text = String("Views: \(cartoon.views)")

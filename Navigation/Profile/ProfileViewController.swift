@@ -52,7 +52,7 @@ class ProfileViewController: UIViewController {
         let button = UIButton(type: .close)
         button.backgroundColor = .white
         button.layer.cornerRadius = 25
-        button.addTarget(self, action: #selector(closeTap), for: .touchUpInside)
+        button.addTarget(ProfileViewController.self, action: #selector(closeTap), for: .touchUpInside)
         button.alpha = 0
         button.toAutoLayout()
         return button
