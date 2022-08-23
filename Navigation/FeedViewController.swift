@@ -5,10 +5,13 @@
 //  Created by Alexey Kurazhov on 01.07.2022.
 //
 
+
 import UIKit
+import StorageService
 
 class FeedViewController: UIViewController {
-    let post: Post = Post(title: "New title")
+    var post: Post = Post(title: "New title")
+    
     
     private lazy var stackView: UIStackView = {
        let stack = UIStackView()
