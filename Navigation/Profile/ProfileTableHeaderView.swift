@@ -19,7 +19,7 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
     }()
     
     let avatarImageView: UIImageView = {
-        let image = UIImageView(image: UIImage(named: "h2"))
+        let image = UIImageView()
         image.layer.borderWidth = 3
         image.layer.borderColor = UIColor.white.cgColor
         image.isUserInteractionEnabled = true
@@ -31,7 +31,6 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
     
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Homer"
         label.toAutoLayout()
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textColor = .black
@@ -56,7 +55,6 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
     
     private lazy var statusLabel: UILabel = {
         let label = UILabel()
-        label.text = "Waiting for something..."
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = .gray
         label.toAutoLayout()
@@ -141,5 +139,11 @@ class ProfileTableHeaderView: UITableViewHeaderFooterView {
             statusLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
             statusLabel.bottomAnchor.constraint(equalTo: statusTextField.topAnchor, constant: -16)
         ])
+    }
+    
+    func setup(fullName: String, status: String, avatarImage: UIImage) {
+        nameLabel.text = fullName
+        statusLabel.text = status
+        avatarImageView.image = avatarImage
     }
 }

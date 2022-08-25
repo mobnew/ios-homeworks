@@ -10,6 +10,7 @@
 		940981FE287C85810011B7F3 /* ProfileTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940981FD287C85810011B7F3 /* ProfileTableHeaderView.swift */; };
 		94098200287C86050011B7F3 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940981FF287C86050011B7F3 /* ProfileTableViewCell.swift */; };
 		94098202287C87A00011B7F3 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94098201287C87A00011B7F3 /* Extension.swift */; };
+		945DC2CC28B64E40009DBB8A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945DC2CB28B64E40009DBB8A /* User.swift */; };
 		948DD9A928B4D5A200456D6A /* StorageService.h in Headers */ = {isa = PBXBuildFile; fileRef = 948DD9A828B4D5A200456D6A /* StorageService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		948DD9AC28B4D5A200456D6A /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 948DD9A628B4D5A200456D6A /* StorageService.framework */; };
 		948DD9AD28B4D5A200456D6A /* StorageService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 948DD9A628B4D5A200456D6A /* StorageService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -60,6 +61,7 @@
 		940981FD287C85810011B7F3 /* ProfileTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHeaderView.swift; sourceTree = "<group>"; };
 		940981FF287C86050011B7F3 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		94098201287C87A00011B7F3 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		945DC2CB28B64E40009DBB8A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		948DD9A628B4D5A200456D6A /* StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		948DD9A828B4D5A200456D6A /* StorageService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorageService.h; sourceTree = "<group>"; };
 		94A089062878C4F600D56B91 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				94A089062878C4F600D56B91 /* LogInViewController.swift */,
+				945DC2CB28B64E40009DBB8A /* User.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				94EAFC812881B65F00D77D94 /* PhotosCollectionViewCell.swift in Sources */,
 				94EAFC782881A7FD00D77D94 /* PhotosTableViewCell.swift in Sources */,
 				94CF9356286EE02100D51B3D /* InfoViewController.swift in Sources */,
+				945DC2CC28B64E40009DBB8A /* User.swift in Sources */,
 				94098200287C86050011B7F3 /* ProfileTableViewCell.swift in Sources */,
 				94A089072878C4F600D56B91 /* LogInViewController.swift in Sources */,
 				94CF9338286ED87900D51B3D /* SceneDelegate.swift in Sources */,
