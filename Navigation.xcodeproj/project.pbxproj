@@ -10,6 +10,8 @@
 		940981FE287C85810011B7F3 /* ProfileTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940981FD287C85810011B7F3 /* ProfileTableHeaderView.swift */; };
 		94098200287C86050011B7F3 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940981FF287C86050011B7F3 /* ProfileTableViewCell.swift */; };
 		94098202287C87A00011B7F3 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94098201287C87A00011B7F3 /* Extension.swift */; };
+		945D890B28B90F44006632DF /* LoginViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945D890A28B90F44006632DF /* LoginViewControllerDelegate.swift */; };
+		945D890D28B91109006632DF /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945D890C28B91109006632DF /* LoginInspector.swift */; };
 		945DC2CC28B64E40009DBB8A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945DC2CB28B64E40009DBB8A /* User.swift */; };
 		946AB04528B7519B00012646 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946AB04428B7519B00012646 /* Checker.swift */; };
 		948DD9A928B4D5A200456D6A /* StorageService.h in Headers */ = {isa = PBXBuildFile; fileRef = 948DD9A828B4D5A200456D6A /* StorageService.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -62,6 +64,8 @@
 		940981FD287C85810011B7F3 /* ProfileTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHeaderView.swift; sourceTree = "<group>"; };
 		940981FF287C86050011B7F3 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		94098201287C87A00011B7F3 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		945D890A28B90F44006632DF /* LoginViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerDelegate.swift; sourceTree = "<group>"; };
+		945D890C28B91109006632DF /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
 		945DC2CB28B64E40009DBB8A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		946AB04428B7519B00012646 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
 		948DD9A628B4D5A200456D6A /* StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -190,6 +194,8 @@
 				94A089062878C4F600D56B91 /* LogInViewController.swift */,
 				945DC2CB28B64E40009DBB8A /* User.swift */,
 				946AB04428B7519B00012646 /* Checker.swift */,
+				945D890A28B90F44006632DF /* LoginViewControllerDelegate.swift */,
+				945D890C28B91109006632DF /* LoginInspector.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -314,7 +320,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				945D890D28B91109006632DF /* LoginInspector.swift in Sources */,
 				94CF9350286EDED200D51B3D /* PostViewController.swift in Sources */,
+				945D890B28B90F44006632DF /* LoginViewControllerDelegate.swift in Sources */,
 				946AB04528B7519B00012646 /* Checker.swift in Sources */,
 				94EAFC7F2881B56700D77D94 /* PhotosViewController.swift in Sources */,
 				940981FE287C85810011B7F3 /* ProfileTableHeaderView.swift in Sources */,
