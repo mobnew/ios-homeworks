@@ -12,6 +12,7 @@ class ProfileViewController: UIViewController {
     
     private var Cartoons: [PostCartoon] = Storage.data
     private var startPoint: CGPoint? = nil
+    var currentUser: User? = nil
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -52,7 +53,7 @@ class ProfileViewController: UIViewController {
         let button = UIButton(type: .close)
         button.backgroundColor = .white
         button.layer.cornerRadius = 25
-        button.addTarget(self, action: #selector(closeTap), for: .touchUpInside)
+        button.addTarget(ProfileViewController.self, action: #selector(closeTap), for: .touchUpInside)
         button.alpha = 0
         button.toAutoLayout()
         return button
@@ -176,7 +177,12 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     //MARK: header setup
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
-            guard let headerCell = tableView.dequeueReusableHeaderFooterView(withIdentifier: "ProfileHeaderCell") as? ProfileTableHeaderView else { return nil }
+            guard let headerCell = tableView.dequeueReusableHeaderFooterView(withIdentifier: "ProfileHeaderCell") as? ProfileTableHeaderView
+            else { return nil }
+            
+            if let currentUser = currentUser {
+                headerCell.setup(fullName: currentUser.fullName, status: currentUser.status, avatarImage: currentUser.avatar)
+            }
             
             let tapAvatar = UITapGestureRecognizer(target: self, action: #selector(tap))
             headerCell.avatarImageView.addGestureRecognizer(tapAvatar)

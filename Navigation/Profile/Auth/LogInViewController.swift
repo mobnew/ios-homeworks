@@ -8,7 +8,7 @@
 import UIKit
 
 class LogInViewController: UIViewController {
-
+    
     private lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView()
         scroll.toAutoLayout()
@@ -161,7 +161,20 @@ class LogInViewController: UIViewController {
     
     @objc private func tapButton() {
         view.endEditing(true)
-        let profileVC = ProfileViewController()
-        navigationController?.pushViewController(profileVC, animated: true)
+        
+        #if DEBUG
+         let choiseLoginService = TestUserService().checkPass(login: emailTextField.text!, pass: passTextField.text!)
+        #else
+        let choiseLoginService = CurrentUserService().checkPass(login: emailTextField.text!, pass: passTextField.text!)
+        #endif
+        
+        if let checkedUser = choiseLoginService {
+            let profileVC = ProfileViewController()
+            profileVC.currentUser = checkedUser
+            navigationController?.pushViewController(profileVC, animated: true)
+        }
+        else {
+            print("Error login")
+        }
     }
 }
