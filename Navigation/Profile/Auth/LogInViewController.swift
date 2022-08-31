@@ -9,7 +9,9 @@ import UIKit
 
 class LogInViewController: UIViewController {
     
-    static var loginDelegate: LoginFactory?
+    
+    var loginDelegate: LoginViewControllerDelegate?
+    static var loginFactoryDelegate: LoginFactory?
     
     private lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView()
@@ -164,7 +166,7 @@ class LogInViewController: UIViewController {
     @objc private func tapButton() {
         view.endEditing(true)
         
-        guard let checkResults = LogInViewController.loginDelegate?.makeLoginInspector().check(login: emailTextField.text!, pass: passTextField.text!) else {
+        guard let checkResults = LogInViewController.loginFactoryDelegate?.makeLoginInspector().check(login: emailTextField.text!, pass: passTextField.text!) else {
             return }
         
         if checkResults {
