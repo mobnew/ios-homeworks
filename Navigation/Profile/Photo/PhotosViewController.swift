@@ -6,8 +6,12 @@
 //
 
 import UIKit
+import iOSIntPackage
 
 class PhotosViewController: UIViewController {
+    
+    private var recivedImages: [UIImage] = []
+    private let imageFasade = ImagePublisherFacade()
     
     private enum Constants {
         static let numberOfItemsInLine: CGFloat = 3
@@ -36,6 +40,20 @@ class PhotosViewController: UIViewController {
         super.viewDidLoad()
         
         setupViews()
+        setupObserver()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        imageFasade.removeSubscription(for: self)
+    }
+    
+    private func setupObserver() {
+        var array2: [UIImage] = []
+        imageFasade.subscribe(self)
+        PhotoStorage.data.forEach { i in
+            array2.append(UIImage(named: i)!)
+        }
+        imageFasade.addImagesWithTimer(time: 0.5, repeat: 20, userImages: array2)
     }
     
     private func setupViews() {
@@ -66,13 +84,13 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
         }
         
         cell.clipsToBounds = true
-        let imageName = PhotoStorage.data[indexPath.row]
+        let imageName = recivedImages[indexPath.row]
         cell.setup(with: imageName)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        PhotoStorage.data.count
+        recivedImages.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -84,5 +102,13 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
         let itemwidth = floor((needwidth) / Constants.numberOfItemsInLine)
         
         return CGSize(width: itemwidth, height: itemwidth)
+    }
+}
+
+
+extension PhotosViewController: ImageLibrarySubscriber {
+    func receive(images: [UIImage]) {
+        recivedImages = images
+        collectionView.reloadData()
     }
 }
