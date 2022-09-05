@@ -14,6 +14,7 @@
 		945D890D28B91109006632DF /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945D890C28B91109006632DF /* LoginInspector.swift */; };
 		945DC2CC28B64E40009DBB8A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945DC2CB28B64E40009DBB8A /* User.swift */; };
 		946AB04528B7519B00012646 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946AB04428B7519B00012646 /* Checker.swift */; };
+		9470EA2628C619DF001E82B6 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 9470EA2528C619DF001E82B6 /* iOSIntPackage */; };
 		948DD9A928B4D5A200456D6A /* StorageService.h in Headers */ = {isa = PBXBuildFile; fileRef = 948DD9A828B4D5A200456D6A /* StorageService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		948DD9AC28B4D5A200456D6A /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 948DD9A628B4D5A200456D6A /* StorageService.framework */; };
 		948DD9AD28B4D5A200456D6A /* StorageService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 948DD9A628B4D5A200456D6A /* StorageService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -106,6 +107,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				948DD9AC28B4D5A200456D6A /* StorageService.framework in Frameworks */,
+				9470EA2628C619DF001E82B6 /* iOSIntPackage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,6 +252,9 @@
 				948DD9AB28B4D5A200456D6A /* PBXTargetDependency */,
 			);
 			name = Navigation;
+			packageProductDependencies = (
+				9470EA2528C619DF001E82B6 /* iOSIntPackage */,
+			);
 			productName = Navigation;
 			productReference = 94CF9332286ED87900D51B3D /* Navigation.app */;
 			productType = "com.apple.product-type.application";
@@ -281,6 +286,9 @@
 				Base,
 			);
 			mainGroup = 94CF9329286ED87900D51B3D;
+			packageReferences = (
+				9470EA2428C619DF001E82B6 /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
+			);
 			productRefGroup = 94CF9333286ED87900D51B3D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -627,6 +635,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9470EA2428C619DF001E82B6 /* XCRemoteSwiftPackageReference "iOSIntPackage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/TrueMax/iOSIntPackage.git";
+			requirement = {
+				branch = imagepublisher;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9470EA2528C619DF001E82B6 /* iOSIntPackage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9470EA2428C619DF001E82B6 /* XCRemoteSwiftPackageReference "iOSIntPackage" */;
+			productName = iOSIntPackage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 94CF932A286ED87900D51B3D /* Project object */;
 }
