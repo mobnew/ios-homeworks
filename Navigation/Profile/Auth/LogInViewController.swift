@@ -9,6 +9,10 @@ import UIKit
 
 class LogInViewController: UIViewController {
     
+    
+    var loginDelegate: LoginViewControllerDelegate?
+    static var loginFactoryDelegate: LoginFactory?
+    
     private lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView()
         scroll.toAutoLayout()
@@ -162,19 +166,24 @@ class LogInViewController: UIViewController {
     @objc private func tapButton() {
         view.endEditing(true)
         
-        #if DEBUG
-         let choiseLoginService = TestUserService().checkPass(login: emailTextField.text!, pass: passTextField.text!)
-        #else
-        let choiseLoginService = CurrentUserService().checkPass(login: emailTextField.text!, pass: passTextField.text!)
-        #endif
+        guard let checkResults = LogInViewController.loginFactoryDelegate?.makeLoginInspector().check(login: emailTextField.text!, pass: passTextField.text!) else {
+            return }
         
-        if let checkedUser = choiseLoginService {
+        if checkResults {
+            guard let user = Checker.shared.user else { return }
+            
             let profileVC = ProfileViewController()
-            profileVC.currentUser = checkedUser
+            profileVC.currentUser = user
             navigationController?.pushViewController(profileVC, animated: true)
+        } else {
+            showAlert()
         }
-        else {
-            print("Error login")
-        }
+        
+    }
+    
+    private func showAlert() {
+        let alert = UIAlertController(title: "Error", message: "Wrong Password", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(alert, animated: true)
     }
 }
