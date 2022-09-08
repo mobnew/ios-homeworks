@@ -51,7 +51,7 @@ class FeedViewController: UIViewController {
     private lazy var checkButton = CustomButton(customTitle: "Check") {
         guard let checkedSecret = self.checkTextField.text else { return }
         
-        if checkedSecret.isEmpty == false {
+        if !checkedSecret.isEmpty {
             if FeedModel().check(word: checkedSecret) {
                 self.checkLabel.text = "Good"
                 self.checkLabel.textColor = .green
