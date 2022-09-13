@@ -12,6 +12,7 @@ import StorageService
 class FeedViewController: UIViewController {
     var post: Post = Post(title: "New title")
     
+    weak var coordinator: FeedCoordinator?
     
     private lazy var stackView: UIStackView = {
         let stack = UIStackView()
@@ -70,9 +71,7 @@ class FeedViewController: UIViewController {
     }
     
     private func postTap() {
-        let postVC = PostViewController()
-        postVC.post = post
-        navigationController?.pushViewController(postVC, animated: true)
+        coordinator?.toPostViewController(send: post)
     }
     
     private func setupSubviews() {

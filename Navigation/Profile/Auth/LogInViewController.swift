@@ -9,6 +9,7 @@ import UIKit
 
 class LogInViewController: UIViewController {
     
+    weak var coordinator: ProfileCoordinator?
     
     var loginDelegate: LoginViewControllerDelegate?
     static var loginFactoryDelegate: LoginFactory?
@@ -172,9 +173,7 @@ class LogInViewController: UIViewController {
         if checkResults {
             guard let user = Checker.shared.user else { return }
             
-            let profileVC = ProfileViewController()
-            profileVC.currentUser = user
-            navigationController?.pushViewController(profileVC, animated: true)
+            coordinator?.toProfileViewController(with: user)
         } else {
             showAlert()
         }
