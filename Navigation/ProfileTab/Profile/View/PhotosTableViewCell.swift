@@ -42,7 +42,7 @@ class PhotosTableViewCell: UITableViewCell {
     
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.toAutoLayout()
         collectionView.backgroundColor = .systemBackground
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -57,7 +57,9 @@ class PhotosTableViewCell: UITableViewCell {
         setupViews()
     }
     
+   
     private func setupViews() {
+        
         contentView.addSubviews(titleLabel, arrowLabel, collectionView)
         
         NSLayoutConstraint.activate([
@@ -90,6 +92,7 @@ class PhotosTableViewCell: UITableViewCell {
 
 extension PhotosTableViewCell: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    
         PhotoStorage.data.count
     }
     

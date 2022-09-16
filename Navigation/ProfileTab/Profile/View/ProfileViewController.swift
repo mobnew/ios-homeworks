@@ -10,9 +10,22 @@ import StorageService
 
 class ProfileViewController: UIViewController {
     
-    private var Cartoons: [PostCartoon] = Storage.data
+    private var currentUser: User?
+    private var cartoons = [PostCartoon]()
+    
+    var viewModel: ProfileViewModelProtocol! {
+        didSet {
+            self.viewModel.userDidChange = { [ weak self ] viewModel in
+                self?.currentUser = viewModel.user ?? nil
+                self?.cartoons = viewModel.cartoons ?? []
+            }
+        }
+    }
+    
+    
     private var startPoint: CGPoint? = nil
-    var currentUser: User? = nil
+    
+    
     weak var coordinator: ProfileCoordinator?
     
     private lazy var tableView: UITableView = {
@@ -63,10 +76,13 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        viewModel.getData()
+        
         setupViews()
     }
     
     private func setupViews() {
+        
         #if DEBUG
         view.backgroundColor = .lightGray
         #else
@@ -152,7 +168,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        section == 0 ? 1 : Cartoons.count
+        section == 0 ? 1 : cartoons.count
     }
     
     //MARK: cell setup
@@ -163,7 +179,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                 return cell
             }
             
-            let cartoon = Cartoons[indexPath.row]
+            let cartoon = cartoons[indexPath.row]
             cell.setup(with: cartoon)
             return cell
         } else {

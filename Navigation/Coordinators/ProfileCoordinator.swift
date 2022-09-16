@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileCoordinator: Coordinator {
+final class ProfileCoordinator: Coordinator {
     
     var navigationController: UINavigationController
     
@@ -15,23 +15,22 @@ class ProfileCoordinator: Coordinator {
         self.navigationController = navigationController
     }
     
+    let screenAssembly = ScreenAssembly()
+    
     func start() {
-        let loginVC = LogInViewController()
-        loginVC.coordinator = self
+        let loginVC = screenAssembly.createLogin(coordinator: self)
         loginVC.tabBarItem.title = "Profile"
         loginVC.tabBarItem.image = UIImage(systemName: "person")
         navigationController.pushViewController(loginVC, animated: false)
     }
     
     func toProfileViewController(with user: User) {
-        let profileVC = ProfileViewController()
-        profileVC.currentUser = user
-        profileVC.coordinator = self
+        let profileVC = screenAssembly.createProfile(user: user, coordinator: self)
         navigationController.pushViewController(profileVC, animated: true)
     }
     
     func toPhotosViewController() {
-        let photosVC = PhotosViewController()
-        navigationController.pushViewController(photosVC, animated: true)
+        let photoVC = screenAssembly.createPhoto()
+        navigationController.pushViewController(photoVC, animated: true)
     }
 }
