@@ -11,7 +11,7 @@ class LogInViewController: UIViewController {
     
     weak var coordinator: ProfileCoordinator?
     
-    var viewModel: LoginViewModelProtocol! {
+    var viewModel: LoginViewModel! {
         didSet {
             self.viewModel.checkerIsLaunched = { [ weak self ] viewModel in
                 guard let resultUser = viewModel.loginedUser else {

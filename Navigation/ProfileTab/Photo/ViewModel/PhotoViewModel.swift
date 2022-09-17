@@ -7,15 +7,7 @@
 
 import Foundation
 
-protocol PhotoViewModelProtocol: AnyObject {
-    
-    var ImageNames: [String]? { get }
-    var imageNameDidChenge: ((PhotoViewModelProtocol) -> ())? { get set }
-    
-    func showMagic()
-}
-
-final class PhotoViewModel: PhotoViewModelProtocol {
+final class PhotoViewModel {
     var ImagesArray: [String]
     
     var ImageNames: [String]? {
@@ -28,7 +20,7 @@ final class PhotoViewModel: PhotoViewModelProtocol {
         self.ImagesArray = model
     }
     
-    var imageNameDidChenge: ((PhotoViewModelProtocol) -> ())?
+    var imageNameDidChenge: ((PhotoViewModel) -> ())?
     
     func showMagic() {
         ImageNames = ImagesArray

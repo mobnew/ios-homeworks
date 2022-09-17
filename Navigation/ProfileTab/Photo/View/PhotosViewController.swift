@@ -10,7 +10,7 @@ import iOSIntPackage
 
 class PhotosViewController: UIViewController {
     
-    var viewModel: PhotoViewModelProtocol! {
+    var viewModel: PhotoViewModel! {
         didSet {
             self.viewModel.imageNameDidChenge = { [ weak self ] viewModel in
                 self?.runObserver(imagesArray: viewModel.ImageNames)

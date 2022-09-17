@@ -7,16 +7,7 @@
 
 import Foundation
 
-protocol LoginViewModelProtocol: AnyObject {
-    
-    var loginFactory: LoginFactory { get set }
-    var loginedUser: User? { get }
-    var checkerIsLaunched: ((LoginViewModel) ->())? { get set }
-    
-    func startChecker(login: String, pass: String)
-}
-
-class LoginViewModel: LoginViewModelProtocol {
+class LoginViewModel {
     static var loginFactoryDelegate: LoginFactory?
     
     var loginFactory: LoginFactory

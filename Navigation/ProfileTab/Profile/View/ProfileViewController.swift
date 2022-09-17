@@ -13,7 +13,7 @@ class ProfileViewController: UIViewController {
     private var currentUser: User?
     private var cartoons = [PostCartoon]()
     
-    var viewModel: ProfileViewModelProtocol! {
+    var viewModel: ProfileViewModel! {
         didSet {
             self.viewModel.userDidChange = { [ weak self ] viewModel in
                 self?.currentUser = viewModel.user ?? nil

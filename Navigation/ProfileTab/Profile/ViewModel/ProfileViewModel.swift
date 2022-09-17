@@ -8,15 +8,7 @@
 import Foundation
 import StorageService
 
-protocol ProfileViewModelProtocol: AnyObject {
-    
-    var user: User? { get }
-    var userDidChange: ((ProfileViewModel) ->())? { get set }
-    
-    func getData()
-}
-
-class ProfileViewModel: ProfileViewModelProtocol {
+class ProfileViewModel {
     var cartoons: [PostCartoon]?
     var oneMoreTmpUser: User?
     
