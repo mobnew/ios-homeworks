@@ -10,22 +10,19 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    var coordinator: TabbarCoordinatorProtocol?
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
+        let tabController = UITabBarController()
+        coordinator = TabbarCoordinator(tabbarController: tabController)
+        coordinator?.start()
+        
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = TabBarController()
+        window?.rootViewController = tabController
         window?.makeKeyAndVisible()
-        
-        if let tb = window?.rootViewController as? UITabBarController,
-           let nav = tb.viewControllers?.last as? UINavigationController,
-           let vc = nav.viewControllers.first as? LogInViewController {
-            vc.loginDelegate = LoginInspector()
-        }
-        
-        LogInViewController.loginFactoryDelegate = MyLoginFactory()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

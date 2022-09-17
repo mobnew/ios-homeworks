@@ -10,9 +10,23 @@ import StorageService
 
 class ProfileViewController: UIViewController {
     
-    private var Cartoons: [PostCartoon] = Storage.data
+    private var currentUser: User?
+    private var cartoons = [PostCartoon]()
+    
+    var viewModel: ProfileViewModel! {
+        didSet {
+            self.viewModel.userDidChange = { [ weak self ] viewModel in
+                self?.currentUser = viewModel.user ?? nil
+                self?.cartoons = viewModel.cartoons ?? []
+            }
+        }
+    }
+    
+    
     private var startPoint: CGPoint? = nil
-    var currentUser: User? = nil
+    
+    
+    weak var coordinator: ProfileCoordinator?
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -53,7 +67,7 @@ class ProfileViewController: UIViewController {
         let button = UIButton(type: .close)
         button.backgroundColor = .white
         button.layer.cornerRadius = 25
-        button.addTarget(ProfileViewController.self, action: #selector(closeTap), for: .touchUpInside)
+        button.addTarget(self, action: #selector(closeTap), for: .touchUpInside)
         button.alpha = 0
         button.toAutoLayout()
         return button
@@ -62,10 +76,13 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        viewModel.getData()
+        
         setupViews()
     }
     
     private func setupViews() {
+        
         #if DEBUG
         view.backgroundColor = .lightGray
         #else
@@ -151,7 +168,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        section == 0 ? 1 : Cartoons.count
+        section == 0 ? 1 : cartoons.count
     }
     
     //MARK: cell setup
@@ -162,7 +179,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                 return cell
             }
             
-            let cartoon = Cartoons[indexPath.row]
+            let cartoon = cartoons[indexPath.row]
             cell.setup(with: cartoon)
             return cell
         } else {
@@ -195,7 +212,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 0) && (indexPath.row == 0) {
-            navigationController?.pushViewController(PhotosViewController(), animated: true)
+            coordinator?.toPhotosViewController()
         }
     }
 }

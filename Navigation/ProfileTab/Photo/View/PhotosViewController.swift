@@ -10,6 +10,14 @@ import iOSIntPackage
 
 class PhotosViewController: UIViewController {
     
+    var viewModel: PhotoViewModel! {
+        didSet {
+            self.viewModel.imageNameDidChenge = { [ weak self ] viewModel in
+                self?.runObserver(imagesArray: viewModel.ImageNames)
+            }
+        }
+    }
+    
     private var recivedImages: [UIImage] = []
     private let imageFasade = ImagePublisherFacade()
     
@@ -40,22 +48,23 @@ class PhotosViewController: UIViewController {
         super.viewDidLoad()
         
         setupViews()
-        setupObserver()
+        viewModel?.showMagic()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         imageFasade.removeSubscription(for: self)
     }
     
-    private func setupObserver() {
-        var array2: [UIImage] = []
-        imageFasade.subscribe(self)
-        PhotoStorage.data.forEach { i in
-            array2.append(UIImage(named: i)!)
+    private func runObserver(imagesArray: [String]?) {
+        var observerArray = [UIImage]()
+        guard let array = imagesArray else { return }
+        array.forEach { i in
+            observerArray.append(UIImage(named: i)!)
         }
-        imageFasade.addImagesWithTimer(time: 0.5, repeat: 20, userImages: array2)
+        imageFasade.subscribe(self)
+        self.imageFasade.addImagesWithTimer(time: 0.5, repeat: 10, userImages: observerArray)
     }
-    
+
     private func setupViews() {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.isHidden = false

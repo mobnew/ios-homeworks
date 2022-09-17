@@ -9,9 +9,19 @@ import UIKit
 
 class LogInViewController: UIViewController {
     
+    weak var coordinator: ProfileCoordinator?
     
-    var loginDelegate: LoginViewControllerDelegate?
-    static var loginFactoryDelegate: LoginFactory?
+    var viewModel: LoginViewModel! {
+        didSet {
+            self.viewModel.checkerIsLaunched = { [ weak self ] viewModel in
+                guard let resultUser = viewModel.loginedUser else {
+                    self?.showAlert()
+                    return
+                }
+                self?.coordinator?.toProfileViewController(with: resultUser)
+            }
+        }
+    }
     
     private lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView()
@@ -166,19 +176,7 @@ class LogInViewController: UIViewController {
     @objc private func tapButton() {
         view.endEditing(true)
         
-        guard let checkResults = LogInViewController.loginFactoryDelegate?.makeLoginInspector().check(login: emailTextField.text!, pass: passTextField.text!) else {
-            return }
-        
-        if checkResults {
-            guard let user = Checker.shared.user else { return }
-            
-            let profileVC = ProfileViewController()
-            profileVC.currentUser = user
-            navigationController?.pushViewController(profileVC, animated: true)
-        } else {
-            showAlert()
-        }
-        
+        viewModel.startChecker(login: emailTextField.text!, pass: passTextField.text!)
     }
     
     private func showAlert() {
