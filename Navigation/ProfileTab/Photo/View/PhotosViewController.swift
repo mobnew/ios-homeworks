@@ -13,13 +13,12 @@ class PhotosViewController: UIViewController {
     var viewModel: PhotoViewModel! {
         didSet {
             self.viewModel.imageNameDidChenge = { [ weak self ] viewModel in
-                self?.runObserver(imagesArray: viewModel.ImageNames)
+                self?.runThread(imagesArray: viewModel.ImageNames)
             }
         }
     }
     
     private var recivedImages: [UIImage] = []
-    private let imageFasade = ImagePublisherFacade()
     
     private enum Constants {
         static let numberOfItemsInLine: CGFloat = 3
@@ -51,20 +50,38 @@ class PhotosViewController: UIViewController {
         viewModel?.showMagic()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        imageFasade.removeSubscription(for: self)
-    }
-    
-    private func runObserver(imagesArray: [String]?) {
+    private func runThread(imagesArray: [String]?) {
         var observerArray = [UIImage]()
         guard let array = imagesArray else { return }
-        array.forEach { i in
-            observerArray.append(UIImage(named: i)!)
+        array.forEach { observerArray.append(UIImage(named: $0)!) }
+        
+        let imageProcessor = ImageProcessor()
+        let start = CFAbsoluteTimeGetCurrent()
+        imageProcessor.processImagesOnThread(sourceImages: observerArray,
+                                             filter: .noir,
+                                             qos: .utility) { cgImage in
+            let diff = CFAbsoluteTimeGetCurrent() - start
+            cgImage.forEach {
+                guard let image = $0 else {return }
+                self.recivedImages.append(UIImage(cgImage: image))
+            }
+            
+            print(diff)
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
         }
-        imageFasade.subscribe(self)
-        self.imageFasade.addImagesWithTimer(time: 0.5, repeat: 10, userImages: observerArray)
+        /*
+         Замер исполнения скорости обработки изображений
+         QoS:
+         .userInteractive : 1.05
+         .userInitiated   : 1.07
+         .default         : 1.10
+         .utility         : 1.40
+         .background      : 3.68
+         */
     }
-
+    
     private func setupViews() {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.isHidden = false
@@ -111,13 +128,5 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
         let itemwidth = floor((needwidth) / Constants.numberOfItemsInLine)
         
         return CGSize(width: itemwidth, height: itemwidth)
-    }
-}
-
-
-extension PhotosViewController: ImageLibrarySubscriber {
-    func receive(images: [UIImage]) {
-        recivedImages = images
-        collectionView.reloadData()
     }
 }

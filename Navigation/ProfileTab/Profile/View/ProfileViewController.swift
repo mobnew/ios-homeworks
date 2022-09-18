@@ -8,6 +8,11 @@
 import UIKit
 import StorageService
 
+protocol navDelegate {
+    func navigateToPhotoVC()
+}
+
+
 class ProfileViewController: UIViewController {
     
     private var currentUser: User?
@@ -24,8 +29,6 @@ class ProfileViewController: UIViewController {
     
     
     private var startPoint: CGPoint? = nil
-    
-    
     weak var coordinator: ProfileCoordinator?
     
     private lazy var tableView: UITableView = {
@@ -187,6 +190,9 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath)
                 return cell
             }
+            
+            cell.navDelegate = self
+            cell.selectionStyle = .none
             return cell
         }
     }
@@ -214,5 +220,11 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         if (indexPath.section == 0) && (indexPath.row == 0) {
             coordinator?.toPhotosViewController()
         }
+    }
+}
+
+extension ProfileViewController: navDelegate {
+    func navigateToPhotoVC() {
+        self.coordinator?.toPhotosViewController()
     }
 }
