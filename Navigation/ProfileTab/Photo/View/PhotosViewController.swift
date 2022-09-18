@@ -72,7 +72,7 @@ class PhotosViewController: UIViewController {
             }
         }
         /*
-         Замер исполнения скорости обработки изображений
+         Замер скорости обработки изображений
          QoS:
          .userInteractive : 1.05
          .userInitiated   : 1.07
