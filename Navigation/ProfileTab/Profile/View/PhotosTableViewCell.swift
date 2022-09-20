@@ -9,6 +9,8 @@ import UIKit
 
 class PhotosTableViewCell: UITableViewCell {
     
+    var navDelegate: navDelegate?
+    
     private enum Constants {
         static let numberOfItemsInLine: CGFloat = 4
     }
@@ -104,7 +106,6 @@ extension PhotosTableViewCell: UICollectionViewDataSource, UICollectionViewDeleg
             cell.backgroundColor = .systemRed
             return cell
         }
-        
         cell.layer.cornerRadius = 8
         cell.clipsToBounds = true
         let imageName = PhotoStorage.data[indexPath.row]
@@ -124,7 +125,6 @@ extension PhotosTableViewCell: UICollectionViewDataSource, UICollectionViewDeleg
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        Как правильно обратиться к навигейшен контроллеру?
-        print("Push")  
+        navDelegate?.navigateToPhotoVC()
     }
 }
