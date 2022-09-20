@@ -23,12 +23,24 @@ class LogInViewController: UIViewController {
         }
     }
     
+    var bruteViewModel: BruteforceViewModel! {
+        didSet {
+            self.bruteViewModel.passFound = { [weak self] bruteViewModel in
+                DispatchQueue.main.async {
+                    self?.bruteforceButton.isEnabled = true
+                    self?.hideLoading()
+                    self?.passTextField.isSecureTextEntry = false
+                    self?.passTextField.text = bruteViewModel.brutedPass
+                }
+                
+            }
+        }
+    }
+    
     private lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView()
         scroll.toAutoLayout()
-        scroll.addSubviews(logoImageView)
-        scroll.addSubviews(emailPassContainer)
-        scroll.addSubviews(loginButton)
+        scroll.addSubviews(logoImageView, loginButton, emailPassContainer, bruteforceButton)
         return scroll
     }()
     
@@ -99,6 +111,42 @@ class LogInViewController: UIViewController {
         return button
     }()
     
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        var activityIndicator = UIActivityIndicatorView(style: .medium)
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.toAutoLayout()
+        return activityIndicator
+    }()
+    
+    private lazy var bruteforceButton: UIButton = {
+        let button = UIButton()
+        
+        button.addSubview(activityIndicator)
+        NSLayoutConstraint.activate([
+            activityIndicator.centerYAnchor.constraint(equalTo: button.centerYAnchor),
+            activityIndicator.centerXAnchor.constraint(equalTo: button.centerXAnchor)
+        ])
+        button.toAutoLayout()
+        button.setTitle("Bruteforce pass", for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.black.cgColor
+        button.addTarget(self, action: #selector(startBrute), for: .touchUpInside)
+        return button
+    }()
+    
+    
+    func showLoading() {
+        bruteforceButton.setTitle("", for: .normal)
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+    }
+    
+    func hideLoading() {
+        bruteforceButton.setTitle("Bruteforce pass", for: .normal)
+        activityIndicator.stopAnimating()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -122,7 +170,7 @@ class LogInViewController: UIViewController {
         view.backgroundColor = .white
         navigationController?.navigationBar.isHidden = true
         
-        view.addSubview(scrollView)
+        view.addSubviews(scrollView)
         
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -146,7 +194,12 @@ class LogInViewController: UIViewController {
             loginButton.heightAnchor.constraint(equalToConstant: 50),
             
             separator.centerYAnchor.constraint(equalTo: emailPassContainer.centerYAnchor),
-            separator.heightAnchor.constraint(equalToConstant: 0.5)
+            separator.heightAnchor.constraint(equalToConstant: 0.5),
+            
+            bruteforceButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 20),
+            bruteforceButton.leadingAnchor.constraint(equalTo: loginButton.leadingAnchor),
+            bruteforceButton.trailingAnchor.constraint(equalTo: loginButton.trailingAnchor),
+            bruteforceButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
     
@@ -177,6 +230,12 @@ class LogInViewController: UIViewController {
         view.endEditing(true)
         
         viewModel.startChecker(login: emailTextField.text!, pass: passTextField.text!)
+    }
+    
+    @objc private func startBrute() {
+        bruteforceButton.isEnabled = false
+        showLoading()
+        bruteViewModel.StartBrute()
     }
     
     private func showAlert() {

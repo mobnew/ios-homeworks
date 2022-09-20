@@ -26,10 +26,17 @@ final class ScreenAssembly: Assembly {
     func createLogin(coordinator: ProfileCoordinator) -> UIViewController {
         let model = MyLoginFactory()
         let viewModel = LoginViewModel(model: model)
+        
+        let passGenerator = PasswordGenerator()
+        let bruteModel = passGenerator.getRandomPass(characterSet: passGenerator.letters, passLength: 4)
+        let bruteViewModel = BruteforceViewModel(model: bruteModel)
+        
         let view = LogInViewController()
         view.coordinator = coordinator
         
         view.viewModel = viewModel
+        view.bruteViewModel = bruteViewModel
+        
         return view
     }
     
