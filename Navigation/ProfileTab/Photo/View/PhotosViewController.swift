@@ -43,11 +43,30 @@ class PhotosViewController: UIViewController {
         return collectionView
     }()
     
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        var activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.startAnimating()
+        activityIndicator.toAutoLayout()
+        return activityIndicator
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupViews()
         viewModel?.showMagic()
+        runTimer()
+    }
+    
+    private func runTimer() {
+        Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true) { timer in
+            if !self.recivedImages.isEmpty {
+                self.activityIndicator.stopAnimating()
+                timer.invalidate()
+                self.collectionView.reloadData()
+            }
+        }
     }
     
     private func runThread(imagesArray: [String]?) {
@@ -59,7 +78,7 @@ class PhotosViewController: UIViewController {
         let start = CFAbsoluteTimeGetCurrent()
         imageProcessor.processImagesOnThread(sourceImages: observerArray,
                                              filter: .noir,
-                                             qos: .utility) { cgImage in
+                                             qos: .background) { cgImage in
             let diff = CFAbsoluteTimeGetCurrent() - start
             cgImage.forEach {
                 guard let image = $0 else {return }
@@ -67,9 +86,9 @@ class PhotosViewController: UIViewController {
             }
             
             print(diff)
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
+            //            DispatchQueue.main.async {
+            //                self.collectionView.reloadData()
+            //            }
         }
         /*
          Замер скорости обработки изображений
@@ -86,13 +105,16 @@ class PhotosViewController: UIViewController {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.isHidden = false
         title = "Photo Gallery"
-        view.addSubview(collectionView)
+        view.addSubviews(collectionView, activityIndicator)
         
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
 }
