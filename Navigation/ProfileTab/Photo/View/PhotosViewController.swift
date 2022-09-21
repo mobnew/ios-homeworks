@@ -86,9 +86,7 @@ class PhotosViewController: UIViewController {
             }
             
             print(diff)
-            //            DispatchQueue.main.async {
-            //                self.collectionView.reloadData()
-            //            }
+
         }
         /*
          Замер скорости обработки изображений
