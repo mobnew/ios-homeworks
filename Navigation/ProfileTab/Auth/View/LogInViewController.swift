@@ -14,9 +14,8 @@ class LogInViewController: UIViewController {
     var viewModel: LoginViewModel! {
         didSet {
             self.viewModel.checkerIsLaunched = { [ weak self ] viewModel in
-                guard let resultUser = viewModel.loginedUser else {
-                    self?.showAlert()
-                    return
+               guard let resultUser = viewModel.loginedUser else {
+                   preconditionFailure("nil User")
                 }
                 self?.coordinator?.toProfileViewController(with: resultUser)
             }
@@ -176,11 +175,19 @@ class LogInViewController: UIViewController {
     @objc private func tapButton() {
         view.endEditing(true)
         
-        viewModel.startChecker(login: emailTextField.text!, pass: passTextField.text!)
+        do {
+          try viewModel.startChecker(login: emailTextField.text!, pass: passTextField.text!)
+        } catch LoginErrors.emptyLogin {
+            showAlert(message: LoginErrors.emptyLogin.description)
+        } catch LoginErrors.emptyPassword {
+            showAlert(message: LoginErrors.emptyPassword.description)
+        } catch LoginErrors.notAuthorized {
+            showAlert(message: LoginErrors.notAuthorized.description)
+        } catch {}
     }
     
-    private func showAlert() {
-        let alert = UIAlertController(title: "Error", message: "Wrong Password", preferredStyle: .alert)
+    private func showAlert(message: String) {
+        let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         self.present(alert, animated: true)
     }
