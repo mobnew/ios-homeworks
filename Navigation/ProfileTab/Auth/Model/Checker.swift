@@ -13,14 +13,16 @@ final class Checker {
     private let loginPrivate: String = "rr"
     private let passPrivate: String = "qq"
     private let userHomer = User(login: "homer", fullName: "Homer Simpson", status: "Sleep", avatar: UIImage(named: "h2")!)
-    var user: User?
     
-    func check(login: String, pass: String) -> Bool {
+    func check(login: String,
+               pass: String,
+               completion: @escaping (Result<User, LoginError>) -> Void
+    ) {
         if (login == loginPrivate) && (pass == passPrivate) {
-             user = userHomer
-            return true
+            completion(.success(userHomer))
         } else {
-            return false
+            completion(.failure(LoginError.notAuthorized))
+            return
         }
     }
 }

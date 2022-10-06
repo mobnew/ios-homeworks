@@ -25,6 +25,7 @@
 		946E152028CA2F140048D0C8 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946E151F28CA2F140048D0C8 /* CustomButton.swift */; };
 		946E152228CA37DC0048D0C8 /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946E152128CA37DC0048D0C8 /* FeedModel.swift */; };
 		9470EA2628C619DF001E82B6 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 9470EA2528C619DF001E82B6 /* iOSIntPackage */; };
+		947F279528E2FBB4009E6288 /* LoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947F279428E2FBB4009E6288 /* LoginError.swift */; };
 		948DD9A928B4D5A200456D6A /* StorageService.h in Headers */ = {isa = PBXBuildFile; fileRef = 948DD9A828B4D5A200456D6A /* StorageService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		948DD9AC28B4D5A200456D6A /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 948DD9A628B4D5A200456D6A /* StorageService.framework */; };
 		948DD9AD28B4D5A200456D6A /* StorageService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 948DD9A628B4D5A200456D6A /* StorageService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -90,6 +91,7 @@
 		946AB04428B7519B00012646 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
 		946E151F28CA2F140048D0C8 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		946E152128CA37DC0048D0C8 /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
+		947F279428E2FBB4009E6288 /* LoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginError.swift; sourceTree = "<group>"; };
 		948DD9A628B4D5A200456D6A /* StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		948DD9A828B4D5A200456D6A /* StorageService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorageService.h; sourceTree = "<group>"; };
 		94A089062878C4F600D56B91 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				945D890A28B90F44006632DF /* LoginViewControllerDelegate.swift */,
 				945D890C28B91109006632DF /* LoginInspector.swift */,
 				94BE565528BA55AA008822CB /* LoginFactory.swift */,
+				947F279428E2FBB4009E6288 /* LoginError.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -480,6 +483,7 @@
 				9469B3EE28D0B5CD007F90BA /* FeedCoordinator.swift in Sources */,
 				9469B3EC28D0B584007F90BA /* CoordinatorsProtocol.swift in Sources */,
 				94A089072878C4F600D56B91 /* LogInViewController.swift in Sources */,
+				947F279528E2FBB4009E6288 /* LoginError.swift in Sources */,
 				94CF9338286ED87900D51B3D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
