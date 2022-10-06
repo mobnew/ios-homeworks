@@ -25,15 +25,15 @@ class LoginViewModel {
     
     func startChecker(login: String, pass: String) throws {
         if login.isEmpty {
-            throw LoginErrors.emptyLogin
+            throw LoginError.emptyLogin
         }
         
         if pass.isEmpty {
-            throw LoginErrors.emptyPassword
+            throw LoginError.emptyPassword
         }
         
         guard let lUser = loginFactory.makeLoginInspector().check(login: login, pass: pass) else {
-            throw LoginErrors.notAuthorized}
+            throw LoginError.notAuthorized}
         loginedUser = lUser
     }
 }

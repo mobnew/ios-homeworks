@@ -177,12 +177,12 @@ class LogInViewController: UIViewController {
         
         do {
           try viewModel.startChecker(login: emailTextField.text!, pass: passTextField.text!)
-        } catch LoginErrors.emptyLogin {
-            showAlert(message: LoginErrors.emptyLogin.description)
-        } catch LoginErrors.emptyPassword {
-            showAlert(message: LoginErrors.emptyPassword.description)
-        } catch LoginErrors.notAuthorized {
-            showAlert(message: LoginErrors.notAuthorized.description)
+        } catch LoginError.emptyLogin {
+            showAlert(message: LoginError.emptyLogin.description)
+        } catch LoginError.emptyPassword {
+            showAlert(message: LoginError.emptyPassword.description)
+        } catch LoginError.notAuthorized {
+            showAlert(message: LoginError.notAuthorized.description)
         } catch {}
     }
     

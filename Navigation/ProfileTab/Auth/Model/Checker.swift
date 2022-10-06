@@ -16,12 +16,12 @@ final class Checker {
     
     func check(login: String,
                pass: String,
-               completion: @escaping (Result<User, LoginErrors>) -> Void
+               completion: @escaping (Result<User, LoginError>) -> Void
     ) {
         if (login == loginPrivate) && (pass == passPrivate) {
             completion(.success(userHomer))
         } else {
-            completion(.failure(LoginErrors.notAuthorized))
+            completion(.failure(LoginError.notAuthorized))
             return
         }
     }

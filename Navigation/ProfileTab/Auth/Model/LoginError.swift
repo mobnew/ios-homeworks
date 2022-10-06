@@ -8,13 +8,13 @@
 import Foundation
 
 
-enum LoginErrors: Error {
+enum LoginError: Error {
     case emptyLogin
     case emptyPassword
     case notAuthorized
 }
 
-extension LoginErrors: CustomStringConvertible {
+extension LoginError: CustomStringConvertible {
     var description: String {
         switch self {
         case .emptyLogin: return "Пустой логин"
