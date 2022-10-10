@@ -65,6 +65,10 @@ class FeedViewController: UIViewController {
         }
     }
     
+    private lazy var avButton = CustomButton(customTitle: "AVPlayer") {
+        self.goToAVPlayer()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubviews()
@@ -74,11 +78,15 @@ class FeedViewController: UIViewController {
         coordinator?.toPostViewController(send: post)
     }
     
+    private func goToAVPlayer() {
+        coordinator?.toAVPlayer()
+    }
+    
     private func setupSubviews() {
         view.backgroundColor = .white
         navigationItem.title = "Feed"
         
-        view.addSubviews(stackView, checkTextField, checkLabel, checkButton)
+        view.addSubviews(stackView, checkTextField, checkLabel, checkButton, avButton)
         stackView.addArrangedSubview(button1)
         stackView.addArrangedSubview(button2)
         
@@ -103,7 +111,12 @@ class FeedViewController: UIViewController {
             checkButton.topAnchor.constraint(equalTo: checkLabel.bottomAnchor, constant: 20),
             checkButton.heightAnchor.constraint(equalToConstant: 40),
             checkButton.widthAnchor.constraint(equalToConstant: 200),
-            checkButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            checkButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            avButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            avButton.heightAnchor.constraint(equalToConstant: 40),
+            avButton.widthAnchor.constraint(equalToConstant: 200),
+            avButton.bottomAnchor.constraint(equalTo: stackView.topAnchor, constant: -50)
         ])
     }
 }
