@@ -19,5 +19,7 @@
 			</array>
 		</dict>
 	</dict>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>The microphone permission is needed to to receive voice commands.</string>
 </dict>
 </plist>
