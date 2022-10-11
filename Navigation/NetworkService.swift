@@ -50,7 +50,6 @@ struct NetworkService {
                 
                 //                Error message:
                 //                The Internet connection appears to be offline.
-                //                    completion?(joke)
                 return
             } catch {
                 print(error)
