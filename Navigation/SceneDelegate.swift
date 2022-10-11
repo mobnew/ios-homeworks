@@ -15,6 +15,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
+        appConfiguration = AppConfiguration.allCases.randomElement()
+        
+        
         let tabController = UITabBarController()
         coordinator = TabbarCoordinator(tabbarController: tabController)
         coordinator?.start()

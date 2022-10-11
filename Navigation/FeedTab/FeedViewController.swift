@@ -91,6 +91,8 @@ class FeedViewController: UIViewController {
         stackView.addArrangedSubview(button2)
         
         setupConstraints()
+        
+        NetworkService.request(for: appConfiguration!)
     }
     
     private func setupConstraints() {
