@@ -18,6 +18,7 @@
 		9421EE4A28EF501D00DA5243 /* 01.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9421EE4528EF501D00DA5243 /* 01.mp3 */; };
 		9421EE4D28EF51AB00DA5243 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9421EE4C28EF51AB00DA5243 /* VideoViewController.swift */; };
 		9421EE5028EF56EF00DA5243 /* RecorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9421EE4F28EF56EF00DA5243 /* RecorderViewController.swift */; };
+		943BFA1E28F47D6600627D8E /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943BFA1D28F47D6600627D8E /* NetworkService.swift */; };
 		945D890B28B90F44006632DF /* LoginViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945D890A28B90F44006632DF /* LoginViewControllerDelegate.swift */; };
 		945D890D28B91109006632DF /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945D890C28B91109006632DF /* LoginInspector.swift */; };
 		945DC2CC28B64E40009DBB8A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945DC2CB28B64E40009DBB8A /* User.swift */; };
@@ -93,6 +94,7 @@
 		9421EE4528EF501D00DA5243 /* 01.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 01.mp3; sourceTree = "<group>"; };
 		9421EE4C28EF51AB00DA5243 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		9421EE4F28EF56EF00DA5243 /* RecorderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderViewController.swift; sourceTree = "<group>"; };
+		943BFA1D28F47D6600627D8E /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		945D890A28B90F44006632DF /* LoginViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerDelegate.swift; sourceTree = "<group>"; };
 		945D890C28B91109006632DF /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
 		945DC2CB28B64E40009DBB8A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -341,6 +343,7 @@
 				94CF9335286ED87900D51B3D /* AppDelegate.swift */,
 				94CF9337286ED87900D51B3D /* SceneDelegate.swift */,
 				9469B3FA28D468E3007F90BA /* ScreenAssembly.swift */,
+				943BFA1D28F47D6600627D8E /* NetworkService.swift */,
 				94CF933E286ED87D00D51B3D /* Assets.xcassets */,
 				94CF9340286ED87D00D51B3D /* LaunchScreen.storyboard */,
 				94CF9343286ED87D00D51B3D /* Info.plist */,
@@ -534,6 +537,7 @@
 				946E152228CA37DC0048D0C8 /* FeedModel.swift in Sources */,
 				9469B3F228D0C65C007F90BA /* ProfileCoordinator.swift in Sources */,
 				94098202287C87A00011B7F3 /* Extension.swift in Sources */,
+				943BFA1E28F47D6600627D8E /* NetworkService.swift in Sources */,
 				94EAFC7A2881AB7200D77D94 /* PhotoStorage.swift in Sources */,
 				94CF934A286EDBDB00D51B3D /* TabBarController.swift in Sources */,
 				94CF9336286ED87900D51B3D /* AppDelegate.swift in Sources */,
