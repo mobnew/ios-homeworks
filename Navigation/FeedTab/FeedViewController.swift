@@ -28,8 +28,8 @@ class FeedViewController: UIViewController {
         self.postTap()
     }
     
-    private lazy var button2 = CustomButton(customTitle: "Button two") {
-        self.postTap()
+    private lazy var button2 = CustomButton(customTitle: "Go to InfoVC") {
+        self.infoTap()
     }
     
     private var checkTextField: UITextField = {
@@ -80,6 +80,10 @@ class FeedViewController: UIViewController {
     
     private func goToAVPlayer() {
         coordinator?.toAVPlayer()
+    }
+    
+    private func infoTap() {
+        coordinator?.toInfoVC()
     }
     
     private func setupSubviews() {
