@@ -47,4 +47,10 @@ class FeedCoordinator: Coordinator {
         recorderVC.coordinator = self
         navigationController.pushViewController(recorderVC, animated: true)
     }
+    
+    func toInfoVC() {
+        let infoVC = InfoViewController()
+        infoVC.coordinator = self
+        navigationController.pushViewController(infoVC, animated: true)
+    }
 }

@@ -301,6 +301,7 @@
 				946E151F28CA2F140048D0C8 /* CustomButton.swift */,
 				946E152128CA37DC0048D0C8 /* FeedModel.swift */,
 				94CF934F286EDED200D51B3D /* PostViewController.swift */,
+				94CF9355286EE02100D51B3D /* InfoViewController.swift */,
 			);
 			path = FeedTab;
 			sourceTree = "<group>";
@@ -363,7 +364,6 @@
 		94EAFC752881A72700D77D94 /* old */ = {
 			isa = PBXGroup;
 			children = (
-				94CF9355286EE02100D51B3D /* InfoViewController.swift */,
 				94CF9349286EDBDB00D51B3D /* TabBarController.swift */,
 				94D292772872E09F00A13CFA /* ProfileHeaderView.swift */,
 			);
