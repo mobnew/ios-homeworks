@@ -13,6 +13,7 @@ import UIKit
 protocol CheckerServiceProtocol {
     func checkCredentials(login: String, pass: String,
                           completion: @escaping (Result<User, LoginError>) -> Void)
+    func createUser(login: String, pass: String, completion: @escaping (Result<User, LoginError>) -> ()?)
 }
 
 
@@ -26,29 +27,16 @@ class CheckerService: CheckerServiceProtocol {
             if let error {
                 let errString = "\(error)"
                 if errString.contains("17011") {
-//                    print("User not found. Create new user.")
-//                    completion(.failure(LoginError.notAuthorized))
-                    self.createUser(login: login, pass: pass) { answer in
-                        guard let answer else {
-//                            print("Не пришел UID при создании")
-                            completion(.failure(LoginError.errorCreateUser))
-                            return
-                        }
-//                        print("создан пользователь \(login)")
-                        completion(.success(self.notHomer))
-                    }
+                    completion(.failure(LoginError.notAuthorized))
                 }
                 
                 if errString.contains("17009") {
-//                    print("Wrong pass for user \(login)")
                     completion(.failure(LoginError.wrongPass))
                 }
                 return
             }
             
             if let result {
-//                print("Result OK")
-//                print(result.user.uid)
                 if result.user.uid == "FQCjEXcpVvW0AbbrHA8kSBggzD92" {
                     completion(.success(self.userHomer))
                 } else {
@@ -60,16 +48,15 @@ class CheckerService: CheckerServiceProtocol {
     
     
     
-    private func createUser(login: String, pass: String, closure: ((_ answer: String?) -> ())?) {
+     func createUser(login: String, pass: String, completion: @escaping (Result<User, LoginError>) -> ()?) {
         Auth.auth().createUser(withEmail: login, password: pass) { result, error in
             if let error {
-//                print(error.localizedDescription)
-                closure?(nil)
+                completion(.failure(LoginError.errorCreateUser))
                 return
             }
             
             if let result {
-                closure?(result.user.uid)
+                completion(.success(self.notHomer))
             }
         }
     }

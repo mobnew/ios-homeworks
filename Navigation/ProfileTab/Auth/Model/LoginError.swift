@@ -14,6 +14,8 @@ enum LoginError: Error {
     case notAuthorized
     case errorCreateUser
     case wrongPass
+    case passLess6
+    case wrongLoginFormat
 }
 
 extension LoginError: CustomStringConvertible {
@@ -24,6 +26,8 @@ extension LoginError: CustomStringConvertible {
         case .notAuthorized: return "Не верная пара логин/пароль"
         case .errorCreateUser: return "Ошибка создания пользователя"
         case .wrongPass: return "Не верный пароль для пользователя"
+        case .passLess6: return "Пароль меньше 6 символов"
+        case .wrongLoginFormat: return "Логин должен быть почтой"
         }
     }
 }
