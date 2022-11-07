@@ -14,7 +14,17 @@ class LogInViewController: UIViewController {
     var viewModel: LoginViewModel! {
         didSet {
             self.viewModel.checkerIsLaunched = { [ weak self ] viewModel in
-               guard let resultUser = viewModel.loginedUser else {
+                if let err = viewModel.loginError  {
+                    if err == .wrongPass {
+                        self?.showAlert(message: "\(err.description) \(self!.emailTextField.text!)")
+                        return
+                    } else {
+                        self?.showAlert(message: err.description)
+                        return
+                    }
+                }
+                
+                guard let resultUser = viewModel.loginedUser else {
                    preconditionFailure("nil User")
                 }
                 self?.coordinator?.toProfileViewController(with: resultUser)
@@ -181,8 +191,6 @@ class LogInViewController: UIViewController {
             showAlert(message: LoginError.emptyLogin.description)
         } catch LoginError.emptyPassword {
             showAlert(message: LoginError.emptyPassword.description)
-        } catch LoginError.notAuthorized {
-            showAlert(message: LoginError.notAuthorized.description)
         } catch {}
     }
     

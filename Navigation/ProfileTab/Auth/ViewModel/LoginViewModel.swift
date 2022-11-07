@@ -17,6 +17,12 @@ class LoginViewModel {
         }
     }
     
+    var loginError: LoginError? {
+        didSet {
+            self.checkerIsLaunched?(self)
+        }
+    }
+    
     var checkerIsLaunched: ((LoginViewModel) -> ())?
     
     init(model: LoginFactory) {
@@ -32,8 +38,25 @@ class LoginViewModel {
             throw LoginError.emptyPassword
         }
         
-        guard let lUser = loginFactory.makeLoginInspector().check(login: login, pass: pass) else {
-            throw LoginError.notAuthorized}
-        loginedUser = lUser
+        //        guard let lUser = loginFactory.makeLoginInspector().check(login: login, pass: pass) else {
+        //            throw LoginError.notAuthorized}
+        //        loginedUser = lUser
+        //    }
+        
+//        print("===== loginViewModel")
+        loginFactory.makeLoginInspector().check(login: login, pass: pass) { user, error in
+            if error != nil {
+                self.loginError = error
+                return
+            }
+            
+            
+            guard let user else {
+//                print("user=nil \(user)")
+                return
+            }
+            
+            self.loginedUser = user
+        }
     }
 }
