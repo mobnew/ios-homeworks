@@ -14,7 +14,17 @@ class LogInViewController: UIViewController {
     var viewModel: LoginViewModel! {
         didSet {
             self.viewModel.checkerIsLaunched = { [ weak self ] viewModel in
-               guard let resultUser = viewModel.loginedUser else {
+                if let err = viewModel.loginError  {
+                    if err == .wrongPass {
+                        self?.showAlert(message: "\(err.description) \(self!.emailTextField.text!)")
+                        return
+                    } else {
+                        self?.showAlert(message: err.description)
+                        return
+                    }
+                }
+                
+                guard let resultUser = viewModel.loginedUser else {
                    preconditionFailure("nil User")
                 }
                 self?.coordinator?.toProfileViewController(with: resultUser)
@@ -25,9 +35,7 @@ class LogInViewController: UIViewController {
     private lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView()
         scroll.toAutoLayout()
-        scroll.addSubviews(logoImageView)
-        scroll.addSubviews(emailPassContainer)
-        scroll.addSubviews(loginButton)
+        scroll.addSubviews(logoImageView, emailPassContainer, loginButton, orLabel, signUpButton)
         return scroll
     }()
     
@@ -98,6 +106,28 @@ class LogInViewController: UIViewController {
         return button
     }()
     
+    private lazy var orLabel: UILabel = {
+        let label = UILabel()
+        label.text = "or"
+        label.textColor = .black
+        label.font = UIFont.systemFont(ofSize: 14)
+        
+        label.toAutoLayout()
+        return label
+    }()
+    
+    private lazy var signUpButton: UIButton = {
+        let button = UIButton()
+        button.toAutoLayout()
+        button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
+        button.alpha = (button.state == .normal) ? 1 : 0.8
+        button.setTitle("Sign Up", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.layer.cornerRadius = 10
+        button.addTarget(self, action: #selector(tapSignUp), for: .touchUpInside)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -145,7 +175,15 @@ class LogInViewController: UIViewController {
             loginButton.heightAnchor.constraint(equalToConstant: 50),
             
             separator.centerYAnchor.constraint(equalTo: emailPassContainer.centerYAnchor),
-            separator.heightAnchor.constraint(equalToConstant: 0.5)
+            separator.heightAnchor.constraint(equalToConstant: 0.5),
+            
+            orLabel.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 10),
+            orLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            signUpButton.topAnchor.constraint(equalTo: orLabel.bottomAnchor, constant: 10),
+            signUpButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            signUpButton.widthAnchor.constraint(equalTo: loginButton.widthAnchor),
+            signUpButton.heightAnchor.constraint(equalTo: loginButton.heightAnchor)
         ])
     }
     
@@ -154,7 +192,7 @@ class LogInViewController: UIViewController {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
             
-            let loginButtonBottomPointY = loginButton.frame.origin.y + loginButton.frame.height + 16
+            let loginButtonBottomPointY = signUpButton.frame.origin.y + signUpButton.frame.height + 40
             
             let keyboardOriginY = view.frame.height - keyboardHeight
             let yOffset = keyboardOriginY < loginButtonBottomPointY ? loginButtonBottomPointY - keyboardOriginY + 16 : 0
@@ -172,6 +210,24 @@ class LogInViewController: UIViewController {
         scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
     
+    @objc private func tapSignUp() {
+        view.endEditing(true)
+        
+        do {
+            try viewModel.createUser(login: emailTextField.text!, pass: passTextField.text!)
+        } catch LoginError.emptyLogin {
+            showAlert(message: LoginError.emptyLogin.description)
+        } catch LoginError.emptyPassword {
+            showAlert(message: LoginError.emptyPassword.description)
+        } catch LoginError.passLess6 {
+            showAlert(message: LoginError.passLess6.description)
+        } catch LoginError.wrongLoginFormat {
+            showAlert(message: LoginError.wrongLoginFormat.description)
+        }
+        
+        catch {}
+    }
+    
     @objc private func tapButton() {
         view.endEditing(true)
         
@@ -181,8 +237,6 @@ class LogInViewController: UIViewController {
             showAlert(message: LoginError.emptyLogin.description)
         } catch LoginError.emptyPassword {
             showAlert(message: LoginError.emptyPassword.description)
-        } catch LoginError.notAuthorized {
-            showAlert(message: LoginError.notAuthorized.description)
         } catch {}
     }
     

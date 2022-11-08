@@ -8,5 +8,5 @@
 import Foundation
 
 protocol LoginViewControllerDelegate {
-    func check(login: String, pass: String) -> User?
+    func check(login: String, pass: String, complition: ((_ answer: User?, _ error: LoginError?) -> ())?)
 }

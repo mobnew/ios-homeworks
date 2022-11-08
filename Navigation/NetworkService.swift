@@ -12,10 +12,6 @@ enum AppConfiguration: String, CaseIterable {
     case url1 = "https://swapi.dev/api/people/8"
     case url2 = "https://swapi.dev/api/starships/3"
     case url3 = "https://swapi.dev/api/planets/5"
-    
-//    static var allCases: [AppConfiguration] {
-//        return [.url1, .url2, .url3]
-//    }
 }
 
 var appConfiguration: AppConfiguration?
@@ -47,9 +43,6 @@ struct NetworkService {
                 print((responce as! HTTPURLResponse).statusCode)
                 print("--------------")
                 print((responce as! HTTPURLResponse).allHeaderFields)
-                
-                //                Error message:
-                //                The Internet connection appears to be offline.
                 return
             } catch {
                 print(error)
