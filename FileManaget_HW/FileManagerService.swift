@@ -33,18 +33,23 @@ class FileManagerService: FileManagerServiceProtocol {
         var listForReturn = [contentStruct]()
         var isDir: ObjCBool = false
         
-        let listDir = try! FileManager.default.contentsOfDirectory(atPath: dir)
-        
-        listDir.forEach { fileItem in
-            if FileManager.default.fileExists(atPath: dir + "/" + fileItem, isDirectory: &isDir) {
-                if isDir.boolValue {
-                    listForReturn.append(contentStruct(name: fileItem, isDir: true))
-                } else {
-                    listForReturn.append(contentStruct(name: fileItem, isDir: true))
+        do {
+            let listDir = try FileManager.default.contentsOfDirectory(atPath: dir)
+            
+            listDir.forEach { fileItem in
+                if FileManager.default.fileExists(atPath: dir + "/" + fileItem, isDirectory: &isDir) {
+                    if isDir.boolValue {
+                        listForReturn.append(contentStruct(name: fileItem, isDir: true))
+                    } else {
+                        listForReturn.append(contentStruct(name: fileItem, isDir: false))
+                    }
                 }
             }
+            return listForReturn
+        } catch {
+            print(error.localizedDescription)
+            return []
         }
-        return listForReturn
     }
     
     func createDirectory(subDirectory dir: String) {
